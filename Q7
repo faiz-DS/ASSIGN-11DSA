@@ -1,0 +1,33 @@
+def search_range(nums, target):
+    def find_leftmost_index():
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return left
+
+    def find_rightmost_index():
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = left + (right - left) // 2
+            if nums[mid] > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return right
+
+    left_index = find_leftmost_index()
+    right_index = find_rightmost_index()
+
+    if left_index <= right_index:
+        return [left_index, right_index]
+    else:
+        return [-1, -1]
+
+# Test cases
+print(search_range([5, 7, 7, 8, 8, 10], 8))  # Output: [3, 4]
+print(search_range([5, 7, 7, 8, 8, 10], 6))  # Output: [-1, -1]
+print(search_range([], 0))  # Output: [-1, -1]

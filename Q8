@@ -1,0 +1,25 @@
+def find_intersection_with_counts(nums1, nums2):
+    # Create dictionaries to store the count of elements in each array
+    count_nums1 = {}
+    count_nums2 = {}
+
+    # Count elements in nums1
+    for num in nums1:
+        count_nums1[num] = count_nums1.get(num, 0) + 1
+
+    # Count elements in nums2
+    for num in nums2:
+        count_nums2[num] = count_nums2.get(num, 0) + 1
+
+    # Find the intersection with counts
+    intersection = []
+    for num in count_nums1:
+        if num in count_nums2:
+            count = min(count_nums1[num], count_nums2[num])
+            intersection.extend([num] * count)
+
+    return intersection
+
+# Test cases
+print(find_intersection_with_counts([1, 2, 2, 1], [2, 2]))  # Output: [2, 2]
+print(find_intersection_with_counts([4, 9, 5], [9, 4, 9, 8, 4]))  # Output: [4, 9]
